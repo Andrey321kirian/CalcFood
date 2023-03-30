@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Table</title>
+  <meta name="viewport"
+   content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+   href="style.css">
+  <script
+   src="https://telegram.org/js/telegram-web-app.js">
+  </script>
+  <script type="text/javascript">
+   function addRow() {
+    var table = document
+     .getElementById("table");
+    
+    var row = table.insertRow(-1);
+    
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    
+    cell1.innerHTML = document
+     .getElementById("col1").value;
+    cell2.innerHTML = document
+     .getElementById("col2").value;
+    cell3.innerHTML = document
+     .getElementById("col3").value;
+    
+    // Произведение второго и третьего столбца является четвертым столбцом таблицы: 
+    
+    cell4.innerHTML = (parseFloat(
+      document.getElementById("col2")
+      .value) * parseFloat(document
+      .getElementById("col3").value))
+     .toFixed(2);
+   }
+   
+   function sum() { // Функция для подсчета суммы в 4-ой колонке:
+    
+    let sum =
+     0; // Обнуляем сумму, присваивая 0:
+    
+    let table = document.querySelector(
+     '#table'); // Выбираем таблицу:
+    
+    for (let i = 1; i < table.rows
+     .length; i++
+    ) { // Проходимся по строкам, начиная с 1-ой (0-ая - header):
+     
+     sum += parseInt(table.rows[i]
+      .cells[3].innerText
+     ); // 3 - 4-ый (Product) столбец, innerText - value:
+     
+    }
+    
+    let result = document
+     .querySelector(
+      '#result'
+     ); // div, выводящий result:
+    
+    result.innerText =
+     'Себестоимость: ' +
+     sum; // Result is + sum:
+   }
+  </script>
+ </head>
+ <body>
+  <h2 class="text-gradient">Название
+   блюда:
+   <input type="text"
+    placeholder="Введите название">
+  </h2>
+  <table id="table" border="8">
+   
+   <tr>
+    <th>Наименование продукта </th>
+    <th>Норма(кг.)</th>
+    <th>Цена(руб.)</th>
+    <th>Сумма(руб.)</th>
+    </td>
+   </tr>
+  </table>
+  <div id='result'></div>
+  </tr>
+  </table>
+  <div class="container">
+   <br>
+   <br /> Название(пр): <input
+    class="item" type="text"
+    id="col1"><br />
+   <br /> Вес(кг.): <input class="item"
+    type="number" id="col2"><br />
+   <br /> Цена(руб.): <input
+    class="item" type="number"
+    id="col3"><br /><br />
+  </div>
+  <br>
+  <br>
+  <div class="container1">
+   <button
+    onclick='sum()'>СЕБЕСТОИМОСТЬ</button>
+   <button
+    onclick="saveTable()">СОХРАНИТЬ
+    ТАБЛИЦУ</button>
+   <button onclick="addRow()">ДОБАВИТЬ
+    СТРОКУ </button>
+   <button
+    onclick="deleteRow()">УДАЛИТЬ
+    СТРОКУ</button>
+  </div>
+  <script type="text/javascript">
+   function deleteRow() { // Функция для удаления последней строки:
+    
+    let table = document.querySelector(
+     '#table'); // Выбираем таблицу:
+    
+    table.deleteRow(table.rows.length -
+     1); // Удаляем последнюю строку:
+   }
+  </script>
+  
+  
+  <script type="text/javascript">
+   function saveTable() {
+    var table = document
+     .getElementById("table");
+    
+    var data = [];
+    
+    for (var i = 0; i < table.rows
+     .length; i++) {
+     data[i] = [];
+     
+     for (var j = 0; j < table.rows[i]
+      .cells.length; j++) {
+      data[i][j] = table.rows[i].cells[
+       j].innerHTML;
+     }
+    }
+    
+    var csvContent =
+     "data:text/csv;charset=utf-8,";
+    
+    data.forEach(function(infoArray,
+     index) {
+     dataString = infoArray.join(
+      ";");
+     csvContent += index < infoArray
+      .length ? dataString + "
+     " : dataString;
+    });
+    
+    var encodedUri = encodeURI(
+     csvContent);
+    
+    var link = document.createElement(
+     "a");
+    
+    link.setAttribute("href",
+     encodedUri);
+    link.setAttribute("download",
+     "table_data.csv");
+    
+    document.body.appendChild(
+     link); // Required for FF
+    
+    link
+     .click(); // This will download the data file named "my_data.csv". 
+   }
+  </script>
+ </body>
+</html>
