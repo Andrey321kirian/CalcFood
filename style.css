@@ -1,0 +1,74 @@
+  @media only screen and (max-width: 375px)  {
+	
+   #table { width: 100%; 
+   }
+
+   #col1, #col2, #col3 { width: 20%; }
+   
+   
+  
+  }
+
+   button { 
+	color: #EBECF0;
+	background-color: #7F83A2;
+	width: 95%;
+	height: 40px;
+   border-radius: 10px;
+   font-weight: bolder;
+   
+	}
+	 
+	 
+ .container {
+  display: flex;
+  align-items: flex-start;
+  position: fixed;
+	bottom: 25%;
+	width: 95%;
+}
+
+.item {
+  align-self: flex-end;
+  text-align: center;
+}
+
+
+.container1 {
+ display: grid;
+  grid: 42px 10px / auto auto;
+	position: fixed;
+	bottom: 15%;
+	width: 100%;
+}
+
+table {
+	border-color: #7F83A2;
+	border-collapse: collapse;
+	border-style: solid;
+	border-radius: 10px;
+	margin-left: -3px;
+}
+body {
+	background-image: 
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: text-gradient 5s ease-in-out infinite;
+}
+
+@keyframes text-gradient {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
